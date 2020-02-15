@@ -22,4 +22,13 @@ public class FibonacciCalculatorTest {
 
         assertEquals(1, result);
     }
+
+    @Test
+    void should_return_2_when_calculate_fib_given_position_3() {
+        int position = 3;
+        FibonacciCalculator calculator = new FibonacciCalculator();
+        long result = calculator.calculate(position);
+
+        assertEquals(2, result);
+    }
 }
