@@ -31,4 +31,13 @@ public class FibonacciCalculatorTest {
 
         assertEquals(2, result);
     }
+
+    @Test
+    void should_return_12586269025L_when_calculate_fib_given_position_50() {
+        int position = 50;
+        FibonacciCalculator calculator = new FibonacciCalculator();
+        long result = calculator.calculate(position);
+
+        assertEquals(12586269025L, result);
+    }
 }
