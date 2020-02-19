@@ -26,10 +26,10 @@ public class Order {
     }
 
     public double getSalesTax() {
-        return lineItemList.stream().mapToDouble(lineItem -> lineItem.totalAmount() * .10).sum();
+        return lineItemList.stream().mapToDouble(lineItem -> lineItem.getTotalAmount() * .10).sum();
     }
 
     public double getTotalAmount() {
-        return lineItemList.stream().mapToDouble(LineItem::totalAmount).sum() + getSalesTax();
+        return lineItemList.stream().mapToDouble(LineItem::getTotalAmount).sum() + getSalesTax();
     }
 }
