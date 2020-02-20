@@ -54,14 +54,15 @@ public class OrderReceipt {
         String footerTemplate = "%s: %.2f\n";
         double salesTax = order.getSalesTax();
         double totalAmount = order.getTotalAmount();
+        double discount = 0d;
 
         footer.append(String.format(footerTemplate, "税额", salesTax));
         if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-            double discount = totalAmount * (1.0 - WED_DISCOUNT_PERCENT);
+            discount = totalAmount * (1.0 - WED_DISCOUNT_PERCENT);
 
             footer.append(String.format(footerTemplate, "折扣", discount));
         }
-        footer.append(String.format(footerTemplate, "总价", totalAmount));
+        footer.append(String.format(footerTemplate, "总价", totalAmount - discount));
 
         return footer.toString();
     }

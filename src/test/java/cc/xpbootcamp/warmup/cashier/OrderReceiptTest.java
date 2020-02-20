@@ -24,6 +24,7 @@ class OrderReceiptTest {
                 LocalDate.parse(DAY_IS_NOT_WEDNESDAY));
         String output = receipt.printReceipt();
 
+        assertThat(output, containsString("2020年2月18日，星期二"));
         assertThat(output, containsString("milk, 10.00 x 2, 20.00"));
         assertThat(output, containsString("biscuits, 5.00 x 5, 25.00"));
         assertThat(output, containsString("chocolate, 20.00 x 1, 20.00"));
@@ -42,11 +43,12 @@ class OrderReceiptTest {
                 LocalDate.parse(DAY_IS_WEDNESDAY));
         String output = receipt.printReceipt();
 
+        assertThat(output, containsString("2020年2月19日，星期三"));
         assertThat(output, containsString("milk, 10.00 x 2, 20.00"));
         assertThat(output, containsString("biscuits, 5.00 x 5, 25.00"));
         assertThat(output, containsString("chocolate, 20.00 x 1, 20.00"));
         assertThat(output, containsString("税额: 6.50"));
         assertThat(output, containsString("折扣: 1.43"));
-        assertThat(output, containsString("总价: 71.50"));
+        assertThat(output, containsString("总价: 70.07"));
     }
 }
