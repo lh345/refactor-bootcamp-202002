@@ -20,8 +20,7 @@ class OrderReceiptTest {
             add(new LineItem("biscuits", 5.0, 5));
             add(new LineItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems),
-                LocalDate.parse(DAY_IS_NOT_WEDNESDAY));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, LocalDate.parse(DAY_IS_NOT_WEDNESDAY)));
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("2020年2月18日，星期二"));
@@ -39,8 +38,7 @@ class OrderReceiptTest {
             add(new LineItem("biscuits", 5.0, 5));
             add(new LineItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems),
-                LocalDate.parse(DAY_IS_WEDNESDAY));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, LocalDate.parse(DAY_IS_WEDNESDAY)));
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("2020年2月19日，星期三"));

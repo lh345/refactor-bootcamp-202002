@@ -13,12 +13,10 @@ import java.util.Locale;
  */
 public class OrderReceipt {
     private Order order;
-    private LocalDate date;
     private final double WED_DISCOUNT_PERCENT = 0.98;
 
-    public OrderReceipt(Order order, LocalDate date) {
+    public OrderReceipt(Order order) {
         this.order = order;
-        this.date = date;
     }
 
     public String printReceipt() {
@@ -36,7 +34,7 @@ public class OrderReceipt {
         String bodyTemplate = "%s, %.2f x %d, %.2f\n";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，E", Locale.CHINESE);
 
-        body.append(String.format("\n%s\n\n", date.format(formatter)));
+        body.append(String.format("\n%s\n\n", order.getCreateAt().format(formatter)));
         for (LineItem lineItem : order.getLineItems()) {
             body.append(String.format(bodyTemplate,
                     lineItem.getDescription(),
@@ -54,6 +52,7 @@ public class OrderReceipt {
         String footerTemplate = "%s: %.2f\n";
         double salesTax = order.getSalesTax();
         double totalAmount = order.getTotalAmount();
+        LocalDate date = order.getCreateAt();
         double discount = 0d;
 
         footer.append(String.format(footerTemplate, "税额", salesTax));
