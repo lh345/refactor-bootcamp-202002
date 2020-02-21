@@ -35,12 +35,12 @@ public class OrderReceipt {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，E", Locale.CHINESE);
 
         body.append(String.format("\n%s\n\n", order.getCreateAt().format(formatter)));
-        for (LineItem lineItem : order.getLineItems()) {
+        for (OrderItem orderItem : order.getOrderItems()) {
             body.append(String.format(bodyTemplate,
-                    lineItem.getDescription(),
-                    lineItem.getPrice(),
-                    lineItem.getQuantity(),
-                    lineItem.getTotalAmount()));
+                    orderItem.getDescription(),
+                    orderItem.getPrice(),
+                    orderItem.getQuantity(),
+                    orderItem.getTotalAmount()));
         }
 
         return body.toString();

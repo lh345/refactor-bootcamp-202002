@@ -15,12 +15,12 @@ class OrderReceiptTest {
 
     @Test
     public void should_print_line_item_and_sales_tax_information_when_is_not_wednesday() {
-        List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("milk", 10.0, 2));
-            add(new LineItem("biscuits", 5.0, 5));
-            add(new LineItem("chocolate", 20.0, 1));
+        List<OrderItem> orderItems = new ArrayList<OrderItem>() {{
+            add(new OrderItem("milk", 10.0, 2));
+            add(new OrderItem("biscuits", 5.0, 5));
+            add(new OrderItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, LocalDate.parse(DAY_IS_NOT_WEDNESDAY)));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderItems, LocalDate.parse(DAY_IS_NOT_WEDNESDAY)));
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("2020年2月18日，星期二"));
@@ -33,12 +33,12 @@ class OrderReceiptTest {
 
     @Test
     public void should_print_line_item_and_sales_tax_and_discount_information_when_is_wednesday() {
-        List<LineItem> lineItems = new ArrayList<LineItem>() {{
-            add(new LineItem("milk", 10.0, 2));
-            add(new LineItem("biscuits", 5.0, 5));
-            add(new LineItem("chocolate", 20.0, 1));
+        List<OrderItem> orderItems = new ArrayList<OrderItem>() {{
+            add(new OrderItem("milk", 10.0, 2));
+            add(new OrderItem("biscuits", 5.0, 5));
+            add(new OrderItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, LocalDate.parse(DAY_IS_WEDNESDAY)));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderItems, LocalDate.parse(DAY_IS_WEDNESDAY)));
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("2020年2月19日，星期三"));

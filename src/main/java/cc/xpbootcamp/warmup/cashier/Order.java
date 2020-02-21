@@ -6,13 +6,13 @@ import java.util.List;
 public class Order {
     String customerName;
     String address;
-    List<LineItem> lineItemList;
+    List<OrderItem> orderItemList;
     LocalDate createAt;
 
-    public Order(String customerName, String address, List<LineItem> lineItemList, LocalDate createAt) {
+    public Order(String customerName, String address, List<OrderItem> orderItemList, LocalDate createAt) {
         this.customerName = customerName;
         this.address = address;
-        this.lineItemList = lineItemList;
+        this.orderItemList = orderItemList;
         this.createAt = createAt;
     }
 
@@ -24,8 +24,8 @@ public class Order {
         return address;
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItemList;
+    public List<OrderItem> getOrderItems() {
+        return orderItemList;
     }
 
     public LocalDate getCreateAt() {
@@ -33,10 +33,10 @@ public class Order {
     }
 
     public double getSalesTax() {
-        return lineItemList.stream().mapToDouble(lineItem -> lineItem.getTotalAmount() * .10).sum();
+        return orderItemList.stream().mapToDouble(orderItem -> orderItem.getTotalAmount() * .10).sum();
     }
 
     public double getTotalAmount() {
-        return lineItemList.stream().mapToDouble(LineItem::getTotalAmount).sum() + getSalesTax();
+        return orderItemList.stream().mapToDouble(OrderItem::getTotalAmount).sum() + getSalesTax();
     }
 }
