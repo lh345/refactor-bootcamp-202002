@@ -42,7 +42,6 @@ public class OrderReceipt {
                     lineItem.getQuantity(),
                     lineItem.getTotalAmount()));
         }
-        body.append("-----------------------------------\n");
 
         return body.toString();
     }
@@ -55,6 +54,7 @@ public class OrderReceipt {
         LocalDate date = order.getCreateAt();
         double discount = 0d;
 
+        footer.append("-----------------------------------\n");
         footer.append(String.format(footerTemplate, "税额", salesTax));
         if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
             discount = totalAmount * (1.0 - WED_DISCOUNT_PERCENT);
