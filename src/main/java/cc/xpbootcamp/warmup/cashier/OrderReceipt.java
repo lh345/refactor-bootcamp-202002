@@ -1,10 +1,5 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -13,7 +8,6 @@ import java.util.Locale;
  */
 public class OrderReceipt {
     private Order order;
-    private final double WED_DISCOUNT_PERCENT = 0.98;
 
     public OrderReceipt(Order order) {
         this.order = order;
@@ -32,9 +26,8 @@ public class OrderReceipt {
     private String getReceiptBody() {
         StringBuilder body = new StringBuilder();
         String bodyTemplate = "%s, %.2f x %d, %.2f\n";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，E", Locale.CHINESE);
 
-        body.append(String.format("\n%s\n\n", order.getCreateAt().format(formatter)));
+        body.append(String.format("\n%s\n\n", order.getCreatedAtDisplay()));
         for (OrderItem orderItem : order.getOrderItems()) {
             body.append(String.format(bodyTemplate,
                     orderItem.getDescription(),
@@ -51,14 +44,11 @@ public class OrderReceipt {
         String footerTemplate = "%s: %.2f\n";
         double salesTax = order.getSalesTax();
         double totalAmount = order.getTotalAmount();
-        LocalDate date = order.getCreateAt();
-        double discount = 0d;
+        double discount = order.getDiscount();
 
         footer.append("-----------------------------------\n");
         footer.append(String.format(footerTemplate, "税额", salesTax));
-        if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-            discount = totalAmount * (1.0 - WED_DISCOUNT_PERCENT);
-
+        if (order.isDiscounted()) {
             footer.append(String.format(footerTemplate, "折扣", discount));
         }
         footer.append(String.format(footerTemplate, "总价", totalAmount - discount));
