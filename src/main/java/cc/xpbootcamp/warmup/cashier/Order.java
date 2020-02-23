@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Order {
+    private final String CREATED_AT_DISPLAY_PATTERN = "yyyy年M月dd日，E";
     private final double WED_DISCOUNT_PERCENT = 0.98;
     String customerName;
     String address;
@@ -56,7 +57,7 @@ public class Order {
     }
 
     public String getCreatedAtDisplay() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，E", Locale.CHINESE);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CREATED_AT_DISPLAY_PATTERN, Locale.CHINESE);
 
         return getCreateAt().format(formatter);
     }

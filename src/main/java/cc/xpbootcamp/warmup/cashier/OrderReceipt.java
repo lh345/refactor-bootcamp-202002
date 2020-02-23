@@ -7,6 +7,8 @@ package cc.xpbootcamp.warmup.cashier;
  * total sales tax) and prints it.
  */
 public class OrderReceipt {
+    private final String SEPARATE_LINE = "-----------------------------------\n";
+    private final String SLOGAN = "===== 老王超市，值得信赖 ======\n";
     private Order order;
 
     public OrderReceipt(Order order) {
@@ -20,7 +22,7 @@ public class OrderReceipt {
     }
 
     private String getReceiptHeader() {
-        return "===== 老王超市，值得信赖 ======\n";
+        return SLOGAN;
     }
 
     private String getReceiptBody() {
@@ -46,7 +48,7 @@ public class OrderReceipt {
         double totalAmount = order.getTotalAmount();
         double discount = order.getDiscount();
 
-        footer.append("-----------------------------------\n");
+        footer.append(SEPARATE_LINE);
         footer.append(String.format(footerTemplate, "税额", salesTax));
         if (order.isDiscounted()) {
             footer.append(String.format(footerTemplate, "折扣", discount));
